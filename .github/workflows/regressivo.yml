@@ -25,7 +25,7 @@ jobs:
 
       - name: Run Robot Framework tests
         run: |
-          robot -d ./log TestCasesAPIBooks.robot  # Linha de execução de teste fornecida
+          robot -d ./log -i Regressivo TestCasesAPIBooks.robot  # Linha de execução de teste fornecida
 
       - name: Archive test results
         if: always()
