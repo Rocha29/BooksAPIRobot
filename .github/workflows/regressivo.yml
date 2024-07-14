@@ -15,7 +15,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.x'  # Use a versão desejada do Python
+          python-version: '3.x'  # Especifique a versão desejada do Python
 
       - name: Install dependencies
         run: |
@@ -27,11 +27,11 @@ jobs:
         run: |
           robot -d ./log -i Regressivo TestCasesAPIBooks.robot
 
-      - name: Install Allure command-line tool
+      - name: Download and Install Allure
         run: |
-          sudo apt-add-repository ppa:qameta/allure
-          sudo apt-get update
-          sudo apt-get install allure
+          wget https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline/2.14.0/allure-commandline-2.14.0.zip
+          unzip allure-commandline-2.14.0.zip -d /opt
+          sudo ln -s /opt/allure-2.14.0/bin/allure /usr/bin/allure
 
       - name: Generate Allure report
         run: |
