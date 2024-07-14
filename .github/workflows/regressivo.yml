@@ -22,10 +22,21 @@ jobs:
           python -m pip install --upgrade pip
           pip install robotframework
           pip install robotframework-requests
+          pip install robotframework-allure
 
       - name: Run Robot Framework tests
         run: |
           robot -d ./log -i Regressivo TestCasesAPIBooks.robot  # Linha de execução de teste fornecida
+
+      - name: Generate Allure Report
+        run: |
+          allure generate ./log -o ./allure-report
+          
+      - name: Publish Allure Report
+        uses: actions/upload-artifact@v3
+        with:
+          name: allure-report
+          path: ./allure-report
 
       - name: Archive test results
         if: always()
