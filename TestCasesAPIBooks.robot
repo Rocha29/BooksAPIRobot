@@ -23,5 +23,4 @@ Realizar Alteracao no cadastro do livro
     Alterar cadastro
 
 
-Realizar a exclusao do livro
-    Excluir livro       2323
+Realizar a exclusa
