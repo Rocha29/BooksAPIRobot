@@ -15,7 +15,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.x'  # Use the desired Python version
+          python-version: '3.x'  # Use a versão desejada do Python
 
       - name: Install dependencies
         run: |
@@ -27,15 +27,19 @@ jobs:
         run: |
           robot -d ./log -i Regressivo TestCasesAPIBooks.robot
 
-      - name: Generate and Publish Allure Report
-        uses: allure-report/github-action@v1
-        with:
-          version: 2.17.0  # Especifique a versão do Allure que você deseja usar
-          directory: ./log  # Diretório onde os resultados do teste estão armazenados
+      - name: Install Allure command-line tool
+        run: |
+          sudo apt-add-repository ppa:qameta/allure
+          sudo apt-get update
+          sudo apt-get install allure
 
-      - name: Archive test results
+      - name: Generate Allure report
+        run: |
+          allure generate ./log -o ./allure-report
+
+      - name: Archive Allure report
         if: always()
         uses: actions/upload-artifact@v3
         with:
-          name: test-results
-          path: ./log
+          name: allure-report
+          path: ./allure-report
