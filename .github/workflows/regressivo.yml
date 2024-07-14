@@ -27,15 +27,16 @@ jobs:
         run: |
           robot -d ./log -i Regressivo TestCasesAPIBooks.robot
 
-      - name: Download and Install Allure
+      - name: Generate Allure report
         run: |
           wget https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline/2.14.0/allure-commandline-2.14.0.zip
           unzip allure-commandline-2.14.0.zip -d /opt
           sudo ln -s /opt/allure-2.14.0/bin/allure /usr/bin/allure
-
-      - name: Generate Allure report
-        run: |
           allure generate ./log -o ./allure-report
+
+      - name: Verify Allure report generation
+        run: |
+          ls -l ./allure-report
 
       - name: Archive Allure report
         if: always()
@@ -43,3 +44,10 @@ jobs:
         with:
           name: allure-report
           path: ./allure-report
+
+      - name: Archive Robot Framework report
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: robot-framework-report
+          path: ./log
