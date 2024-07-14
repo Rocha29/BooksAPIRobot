@@ -13,7 +13,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v2
         with:
           python-version: '3.x'  # Use the desired Python version
 
@@ -23,25 +23,15 @@ jobs:
           pip install robotframework
           pip install robotframework-requests
 
-      - name: Install Allure CLI
-        run: |
-          sudo apt-add-repository ppa:qameta/allure
-          sudo apt-get update
-          sudo apt-get install allure
-
       - name: Run Robot Framework tests
         run: |
           robot -d ./log -i Regressivo TestCasesAPIBooks.robot
 
-      - name: Generate Allure Report
-        run: |
-          allure generate ./log -o ./allure-report
-
-      - name: Publish Allure Report
-        uses: actions/upload-artifact@v3
+      - name: Generate and Publish Allure Report
+        uses: allure-report/github-action@v1
         with:
-          name: allure-report
-          path: ./allure-report
+          version: 2.17.0  # Especifique a versão do Allure que você deseja usar
+          directory: ./log  # Diretório onde os resultados do teste estão armazenados
 
       - name: Archive test results
         if: always()
