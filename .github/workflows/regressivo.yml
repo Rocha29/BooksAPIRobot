@@ -1,0 +1,35 @@
+name: API Teste Regressivos PR
+
+on:
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  RunApiTests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'  # Use the desired Python version
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install robotframework
+          pip install robotframework-requests
+
+      - name: Run Robot Framework tests
+        run: |
+          robot -d ./log TestCasesAPIBooks.robot  # Linha de execução de teste fornecida
+
+      - name: Archive test results
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-results
+          path: ./log  # Diretório onde o Robot Framework armazena os resultados
