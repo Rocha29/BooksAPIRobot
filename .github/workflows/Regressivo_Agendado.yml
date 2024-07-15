@@ -1,10 +1,10 @@
-name: API Teste Regressivos Agendado Robot API
+name: API Testes Regressivos Agendado Robot API
 
 on:
   pull_request:
     branches: [ main ]
   Scheudule:
-     - cron:  '*/5 * * * 1-5'
+     - cron:  '*/60 10 * * 1-5'
 
 jobs:
   RunApiTests:
