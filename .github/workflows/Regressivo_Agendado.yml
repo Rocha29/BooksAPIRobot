@@ -55,10 +55,13 @@ jobs:
           path: ./log
 
       - name: Send Telegram Notification
-        env:
-          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-        run: |
-          STATUS="Success"
-          if [ "${{ job.status }}" != "success" ]; then STATUS="Failed"; fi
-          curl -s -X POST "https://api.telegram.org/bot${{ env.TELEGRAM_BOT_TOKEN }}/sendMessage" -d chat_id=${{ env.TELEGRAM_CHAT_ID }} -d text="The GitHub Actions job has completed with status: $STATUS"
+  env:
+    TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+    TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+  run: |
+    STATUS="Success"
+    if [ "${{ job.status }}" != "success" ]; then STATUS="Failed"; fi
+    EMOJI="✅"  # Emoji verde para sucesso
+    if [ "$STATUS" = "Failed" ]; then EMOJI="❌"; fi  # Emoji vermelho para falha
+    curl -s -X POST "https://api.telegram.org/bot${{ env.TELEGRAM_BOT_TOKEN }}/sendMessage" -d chat_id=${{ env.TELEGRAM_CHAT_ID }} -d text="BooksAPIRobot CI/CD job completed with status: $STATUS $EMOJI"
+
