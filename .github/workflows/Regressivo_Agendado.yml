@@ -3,7 +3,7 @@ name: API Testes Regressivos Agendado Robot API
 on:
   pull_request:
     branches: [ main ]
-  Scheudule:
+  Schedule:
      - cron:  '*/60 10 * * 1-5'
 
 jobs:
