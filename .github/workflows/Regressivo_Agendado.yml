@@ -3,8 +3,8 @@ name: API Testes Regressivos Agendado Robot API
 on:
   pull_request:
     branches: [ main ]
-  Schedule:
-     - cron:  '*/60 10 * * 1-5'
+  schedule:
+    - cron:  '0 10 * * 1-5'  # Ajustado para agendar a execução diária às 10:00 de segunda a sexta
 
 jobs:
   RunApiTests:
