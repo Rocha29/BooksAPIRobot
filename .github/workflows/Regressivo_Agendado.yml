@@ -4,7 +4,7 @@ on:
   pull_request:
     branches: [ main ]
   schedule:
-    - cron:  '0 10 * * 1-5'  # Ajustado para agendar a execução diária às 10:00 de segunda a sexta
+    - cron: '*/60 10 * * 1-5'
 
 jobs:
   RunApiTests:
@@ -17,7 +17,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.x'  # Especifique a versão desejada do Python
+          python-version: '3.x'
 
       - name: Install dependencies
         run: |
@@ -53,3 +53,5 @@ jobs:
         with:
           name: robot-framework-report
           path: ./log
+
+      - name: Send
