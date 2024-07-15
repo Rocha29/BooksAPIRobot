@@ -19,14 +19,4 @@ CT02 Buscar um Livro específico (GET em um livro específico)
 CT03 Cadastrar um novo livro (POST)
     [Tags]        POST        Regressivo
     Cadastrar um novo livro
-#Conferir se retorna todos os dados do livro cadastrado
- #   Conferir dados do livro cadastrado
-
-CT04 Realizar Alteracao no cadastro do livro
-    [Tags]        PATH        Regressivo
-    Alterar cadastro
-
-
-CT05 Realizar a exclusao do livro
-    [Tags]        DELETE        Regressivo
-    Excluir livro       2323
+#Conferir se retorna tod
