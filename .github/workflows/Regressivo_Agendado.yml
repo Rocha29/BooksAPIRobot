@@ -1,4 +1,4 @@
-name: API Teste Regressivos Agendado Robot API
+name: API Testes Regressivos Agendado Robot API
 
 on:
   pull_request:
