@@ -12,10 +12,12 @@ CT01 Buscar a listagem de todos os livros (GET em todos os livros)
     Conferir se retorna uma lista com "200" livros
 
 CT02 Buscar um Livro específico (GET em um livro específico)
-    [Tags]        GET        Regressivo_99
+    [Tags]        GET        Regressivo 
+    Conectar a minha API
     Requisitar o livro "15"
+    Conferir o status code    200
+    Conferir o reason         OK
     Conferir se retorna todos os dados corretos do livro 15
-
 CT03 Cadastrar um novo livro (POST)
     [Tags]        POST        Regressivo
     Cadastrar um novo livro
